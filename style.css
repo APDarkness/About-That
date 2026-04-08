@@ -12,6 +12,19 @@ header {
   border-bottom: 1px solid #333;
 }
 
+button {
+  background: #222733;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #2e3445;
+}
+
 h1 {
   margin: 0;
 }
@@ -24,7 +37,6 @@ main {
 
 .post {
   background: #1a1d24;
-  padding: 15px;
   margin-bottom: 15px;
   border-radius: 10px;
   transition: 0.2s;
@@ -34,7 +46,9 @@ main {
   background: #222733;
 }
 
-.post a {
+.post-link {
+  display: block;
+  padding: 15px;
   color: white;
   text-decoration: none;
 }
