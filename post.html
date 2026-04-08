@@ -8,7 +8,7 @@
 <body>
 
 <header>
-  <a href="index.html">← Back</a>
+  <button onclick="history.back()">← Back</button>
 </header>
 
 <main id="post"></main>
@@ -22,6 +22,11 @@ fetch("posts.json")
   .then(posts => {
     const post = posts.find(p => p.id == id);
 
+    if (!post) {
+      document.getElementById("post").innerHTML = "<h1>Post not found</h1>";
+      return;
+    }
+
     document.getElementById("post").innerHTML = `
       <h1>${post.title}</h1>
       <p class="date">${post.date}</p>
@@ -32,3 +37,4 @@ fetch("posts.json")
 
 </body>
 </html>
+
