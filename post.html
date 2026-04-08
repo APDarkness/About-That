@@ -1,28 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Post</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<header>
-  <button onclick="history.back()">← Back</button>
-</header>
-
-<main id="post"></main>
-
 <script>
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
+console.log("Post ID from URL:", id);
+
 fetch("posts.json")
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) throw new Error("Failed to load posts.json");
+    return res.json();
+  })
   .then(posts => {
+    console.log("Posts loaded:", posts);
+
     const post = posts.find(p => p.id == id);
 
     if (!post) {
+      console.log("Post not found");
       document.getElementById("post").innerHTML = "<h1>Post not found</h1>";
       return;
     }
@@ -32,9 +25,6 @@ fetch("posts.json")
       <p class="date">${post.date}</p>
       <div class="content">${post.content}</div>
     `;
-  });
+  })
+  .catch(err => console.error("Error:", err));
 </script>
-
-</body>
-</html>
-
