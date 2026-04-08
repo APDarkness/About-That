@@ -1,30 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Post</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html">← Back</a>
+</header>
+
+<main id="post"></main>
+
 <script>
 const params = new URLSearchParams(window.location.search);
 const id = params.get("id");
 
-console.log("Post ID from URL:", id);
-
 fetch("posts.json")
-  .then(res => {
-    if (!res.ok) throw new Error("Failed to load posts.json");
-    return res.json();
-  })
+  .then(res => res.json())
   .then(posts => {
-    console.log("Posts loaded:", posts);
-
     const post = posts.find(p => p.id == id);
-
-    if (!post) {
-      console.log("Post not found");
-      document.getElementById("post").innerHTML = "<h1>Post not found</h1>";
-      return;
-    }
 
     document.getElementById("post").innerHTML = `
       <h1>${post.title}</h1>
       <p class="date">${post.date}</p>
       <div class="content">${post.content}</div>
     `;
-  })
-  .catch(err => console.error("Error:", err));
+  });
 </script>
+
+</body>
+</html>
